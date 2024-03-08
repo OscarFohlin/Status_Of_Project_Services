@@ -5,9 +5,17 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const services = [
-        { name: "ADVERTISEMENT API", url: "https://jsonplaceholder.typicode.com/posts" },
-        { name: "ORGANISATIONS API", url: "https://informatik7.ei.hv.se/ProfilAPI/api/Organisation" },
-        { name: "PROFILE API", url: "https://informatik7.ei.hv.se/ProfilAPI/api/Profile" },
+        { name: "TEST API", url: "https://jsonplaceholder.typicode.com/posts", serverurl: "https://jsonplaceholder.typicode.com/posts"},
+        { name: "FIXED EVENTS API", url: "https://informatik1.ei.hv.se/FixedEventAPI/api/FixedEvents", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "FIXED EVENTS API", url: "https://informatik1.ei.hv.se/FixedEventAPI/api/Tags", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "ORGANIZERS API", url: "https://informatik2.ei.hv.se/OrganizerAPI/api/Organizers", serverurl: "https://informatik2.ei.hv.se/OrganizerAPI" },
+        { name: "PROFILE API", url: "https://informatik3.ei.hv.se/KontoInloggAPI/api/Admins", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "PROFILE API", url: "https://informatik3.ei.hv.se/KontoInloggAPI/api/Orgs", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "PROFILE API", url: "https://informatik3.ei.hv.se/KontoInloggAPI/api/Users", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "PROFILE API", url: "https://informatik4.ei.hv.se/EVENTAPI/api/events", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "PROFILE API", url: "https://informatik7.ei.hv.se/ProfilAPI/api/Profile", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "ORGANISATIONS API", url: "https://informatik7.ei.hv.se/ProfilAPI/api/Organisation", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
+        { name: "PROFILE API", url: "https://informatik8.ei.hv.se/Places_API/api/Places", serverurl: "https://informatik7.ei.hv.se/ProfilAPI" },
     ];
 
     function checkServiceStatus(url, statusElement) {
@@ -25,13 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    function checkServerStatus(url, statusElement, latencyElement) {
-        fetch(url, { method: 'HEAD' })
+    function checkServerStatus(serverUrl, statusElement) {
+        fetch(serverUrl, { method: 'HEAD' })
             .then(response => {
-
                 if (response.ok) {
                     statusElement.textContent = "Server Up";
-
                 } else {
                     statusElement.textContent = "Server Down";
                 }
@@ -57,13 +63,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    function updateServiceStatus() {
+        services.forEach((service, index) => {
+            const serviceNameElement = document.getElementById('serviceName' + (index + 1));
+            const serviceUrlElement = document.getElementById('serviceUrl' + (index + 1));
+            const serviceStatusElement = document.getElementById('serviceStatus' + (index + 1));
+            const serverStatusElement = document.getElementById('serverStatus' + (index + 1));
+            const latencyElement = document.getElementById('serviceLatency' + (index + 1));
 
-    services.forEach((service, index) => {
-        const serviceStatusElement = document.getElementById('serviceStatus' + (index + 1));
-        const serverStatusElement = document.getElementById('serverStatus' + (index + 1));
-        const latencyElement = document.getElementById('serviceLatency' + (index + 1));
-        checkServiceStatus(service.url, serviceStatusElement);
-        checkServerStatus(service.url, serverStatusElement);
-        checkServiceLatency(service.url, latencyElement);
-    });
+            serviceNameElement.textContent = service.name;
+            serviceUrlElement.textContent = service.url;
+
+            checkServiceStatus(service.url, serviceStatusElement);
+            checkServerStatus(service.serverurl, serverStatusElement);
+            checkServiceLatency(service.url, latencyElement);
+        });
+
+    }
+
+    //för att uppdatera sidan varje 5000ms
+    setInterval(updateServiceStatus, 5000);
+    updateServiceStatus();
+
+
+
 });

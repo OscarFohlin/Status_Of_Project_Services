@@ -1,19 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-
-    // definering av temporära urls o namn
-    string[] serviceNames = {
-        "ADVERTISEMENT API",
-        "ORGANISATIONS API",
-        "PROFILE API",
-
-    };
-
     string[] serviceUrls = {
         "https://jsonplaceholder.typicode.com/posts",
-        "https://informatik7.ei.hv.se/ProfilAPI/swagger/index.html",
-        "https://informatik7.ei.hv.se/ProfilAPI/swagger/index.html",
-
+        "https://informatik1.ei.hv.se/FixedEventAPI/api/FixedEvents",
+        "https://informatik1.ei.hv.se/FixedEventAPI/api/Tags",
+        "https://informatik2.ei.hv.se/OrganizerAPI/api/Organizers",
+        "https://informatik3.ei.hv.se/KontoInloggAPI/api/Admins",
+        "https://informatik3.ei.hv.se/KontoInloggAPI/api/Orgs",
+        "https://informatik3.ei.hv.se/KontoInloggAPI/api/Users",
+        "https://informatik4.ei.hv.se/EVENTAPI/api/events",
+        "https://informatik7.ei.hv.se/ProfilAPI/api/Profile",
+        "https://informatik7.ei.hv.se/ProfilAPI/api/SignUps",
+        "https://informatik8.ei.hv.se/Places_API/api/Places"
     };
 }
 
@@ -33,8 +31,8 @@
         @for (int i = 0; i < serviceUrls.Length; i++)
         {
             <tr>
-                <td class="service-type-description">@serviceNames[i]</td>
-                <td class="service-type-description"><a href="@serviceUrls[i]">@serviceUrls[i]</a></td>
+                <td class="service-type-description"><span id="serviceName@(i + 1)">Unknown</span></td>
+                <td class="service-type-description"><span id="serviceUrl@(i + 1)">@serviceUrls[i]</span></td>
                 <td class="service-type-description"><span id="serviceStatus@(i + 1)">Unknown</span></td>
                 <td class="service-type-description"><span id="serverStatus@(i + 1)">Unknown</span></td>
                 <td class="service-type-description"><span id="serviceLatency@(i + 1)">Unknown</span></td>
