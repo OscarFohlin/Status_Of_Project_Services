@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Status_Of_Project_Services.props" />
+</Project>
