@@ -22,12 +22,26 @@ body {
 }
 
 .service-type{
-    width: 500px;
-    height: 40px;
-    font-size: 20px;
+    width: fit-content;
+    height: 50px;
+    font-size: 24px;
 }
 
 .service-type-description {
-    overflow: hidden;
-    font-size: 16px;
+    font-size: 18px;
+}
+
+.service-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.service-table th, .service-table td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.service-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Adding background color to even rows */
 }
