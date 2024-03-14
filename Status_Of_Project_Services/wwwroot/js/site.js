@@ -2,8 +2,3 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
-document.addEventListener("DOMContentLoaded", function () {
-    updateServiceStatus();
-    setInterval(updateServiceStatus, 5000);
-});

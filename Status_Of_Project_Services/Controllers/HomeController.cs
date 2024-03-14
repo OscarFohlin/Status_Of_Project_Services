@@ -25,7 +25,6 @@ namespace Status_Of_Project_Services.Controllers
         "https://informatik1.ei.hv.se/ActivityAPI/api/Categories",
         "https://informatik1.ei.hv.se/ActivityAPI/api/Tags",
         "https://informatik2.ei.hv.se/OrganizerAPI/api/Organizers",
-        "https://informatik2.ei.hv.se/KontoInloggAPI/api/UserAuths", //post request så ksk inte funkar, funkar inte men har kvar så länge
         "https://informatik3.ei.hv.se/KontoInloggAPI/api/Users",
         "https://informatik4.ei.hv.se/EVENTAPI2/api/events",
         "https://informatik6.ei.hv.se/statisticapi/api/ActivityStatistics",
@@ -58,17 +57,20 @@ namespace Status_Of_Project_Services.Controllers
 
                     string statusOfService;
 
+                    //om du får en statuskod som är "godkänd"
                     if (getData.IsSuccessStatusCode)
                     {
                         stopwatch.Stop();
-                        statusOfService = "Operational";
+                        statusOfService = "RUNNING";
                     }
+                    //eller inte
                     else
                     {
-                        statusOfService = "Not Operational";
+                        statusOfService = "N/A";
                         Console.WriteLine("ERROR");
                     }
 
+                    //för att kunna skriva ut resultaten i listan
                     serviceInfos.Add(new ServiceInformation
                     {
                         ServiceName = serviceName.ToUpper(),
@@ -80,10 +82,11 @@ namespace Status_Of_Project_Services.Controllers
                     });
                 }
             }
-
+            //skiickar tillbaka informationen från listan till view:en som används
             return View(serviceInfos);
         }
 
+        //funktion för att kunna ta ut namnet av servicen som används
         private string ExtractServiceName(string apiUrl)
         {
             Uri uri = new Uri(apiUrl);
