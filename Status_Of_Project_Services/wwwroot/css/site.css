@@ -24,6 +24,7 @@ body {
 
 .service-type-description {
     font-size: 18px;
+    font-weight: 500;
 }
 
 .service-table {
@@ -39,4 +40,17 @@ body {
 
 .service-table tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.text-white{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.highlight-success {
+    color: lawngreen;
+}
+
+.highlight-error {
+    text-color: red;
 }

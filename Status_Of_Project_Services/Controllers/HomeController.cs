@@ -4,6 +4,7 @@ using Status_Of_Project_Services.Models;
 using System.Data;
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using static System.Net.WebRequestMethods;
 
 namespace Status_Of_Project_Services.Controllers
 {
@@ -30,9 +31,13 @@ namespace Status_Of_Project_Services.Controllers
         "https://informatik6.ei.hv.se/statisticapi/api/ActivityStatistics",
         "https://informatik6.ei.hv.se/statisticapi/api/AdStatistics",
         "https://informatik6.ei.hv.se/statisticapi/api/EventStatistics",
+        "https://informatik6.ei.hv.se/advertisement/api/Ads/getallads",
+        "https://informatik6.ei.hv.se/advertisement/api/Ads/horizontal",
         "https://informatik7.ei.hv.se/ProfilAPI/api/Citizens",
         "https://informatik7.ei.hv.se/ProfilAPI/api/SignUps",
         "https://informatik8.ei.hv.se/Places_API/api/Places",
+        "https://informatik8.ei.hv.se/Places_API2/api/Places",
+
         };
 
             List<ServiceInformation> serviceInfos = new List<ServiceInformation>();
@@ -61,12 +66,12 @@ namespace Status_Of_Project_Services.Controllers
                     if (getData.IsSuccessStatusCode)
                     {
                         stopwatch.Stop();
-                        statusOfService = "RUNNING";
+                        statusOfService = "Körs";
                     }
                     //eller inte
                     else
                     {
-                        statusOfService = "N/A";
+                        statusOfService = "Ej tillgänglig";
                         Console.WriteLine("ERROR");
                     }
 
@@ -93,11 +98,6 @@ namespace Status_Of_Project_Services.Controllers
             string[] parts = uri.AbsolutePath.Split('/');
             string serviceName = parts.FirstOrDefault(part => !string.IsNullOrEmpty(part));
             return serviceName;
-        }
-
-        public IActionResult Service()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
